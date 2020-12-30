@@ -1,11 +1,17 @@
 package com.asusoftware.carrent.model;
 
+import com.sun.istack.Nullable;
+
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -18,10 +24,39 @@ import java.util.UUID;
 @Table(name = "users")
 public class User {
 
+    @Id @GeneratedValue
     private UUID id;
+
+    @NotBlank
+    @Column(name = "first_name")
     private String firstName;
+
+    @NotBlank
+    @Column(name = "last_name")
     private String lastName;
+
+    @Nullable
+    @Column(name = "birthday")
     private Date birthday;
+
+    @Email
+    @NotBlank
+    @Column(name = "email")
     private String email;
+
+    @NotBlank
+    @Column(name = "password")
     private String password;
+
+    @NotNull
+    @Column(name = "address")
+    private Address address;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    @NotNull
+    @Column(name = "payment_info")
+    private PaymentInfo paymentInfo;
+
 }
