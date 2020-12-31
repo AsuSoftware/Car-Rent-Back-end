@@ -1,5 +1,6 @@
 package com.asusoftware.carrent.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sun.istack.Nullable;
 
 import javax.persistence.*;
@@ -36,6 +37,7 @@ public class User {
     private String lastName;
 
     @Nullable
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "birthday")
     private Date birthday;
 
@@ -43,6 +45,10 @@ public class User {
     @NotBlank
     @Column(name = "email")
     private String email;
+
+    @NotBlank
+    @Column(name = "phone")
+    private String phone;
 
     @NotBlank
     @Column(name = "password")
@@ -58,5 +64,8 @@ public class User {
     @NotNull
     @Column(name = "payment_info")
     private PaymentInfo paymentInfo;
+
+    @OneToMany(mappedBy = "user")
+    private List<Reservation> reservations;
 
 }
