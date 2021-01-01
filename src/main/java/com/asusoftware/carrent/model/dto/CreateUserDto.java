@@ -22,6 +22,7 @@ public class CreateUserDto {
    @JsonFormat(pattern="yyyy-MM-dd")
    @NotNull private Date birthday;
    @Email @NotNull private String email;
+   @NotNull private String phone;
    @NotBlank private String password;
    @NotNull private AddressDto address;
    @NotNull private PaymentInfo paymentInfo;
